@@ -1,0 +1,6 @@
+body {
+  /* background-color: rgb(0,88,148); */
+  background-image: linear-gradient(to right, green, blue);
+  color: white;
+  font-size: 100;
+}
