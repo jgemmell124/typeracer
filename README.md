@@ -1,3 +1,6 @@
+# This is a TypeRacer remake using React
+It is meant to test your typing speed and eventually race against other players
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

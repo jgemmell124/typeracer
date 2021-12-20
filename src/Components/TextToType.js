@@ -130,6 +130,10 @@ export default class TextToType extends Component {
         e.target.value = "Done!";
         isDone = 1;
         this.shiftWords(e);
+        this.setState({
+          style: "text-box-done",
+        });
+        //this.checkInput(e);
       }
       else {
         this.checkInput(e);
@@ -166,6 +170,10 @@ export default class TextToType extends Component {
       e.target.value = "Done!";
       isDone = 1;
       this.props.setTimer(false);
+      this.setState({
+        ...this.state,
+        style: "text-box-done"
+      })
     }
     else {
       this.checkInput(e);

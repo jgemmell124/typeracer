@@ -2,6 +2,7 @@ import TextToType from "./Components/TextToType";
 import Restart from "./Components/Restart";
 import Timer from "./Components/Timer";
 import { useState } from 'react';
+import Timer2 from "./Components/Timer2";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
     // [show progress bar]
     
     <div>
+      <Timer2 />
       <Timer timer={timer} numChars={numChars} />
       <TextToType setTimer={setTimer} numChars={numChars} setNumChars={setNumChars}/>
       
