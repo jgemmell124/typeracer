@@ -15,7 +15,7 @@ export default function Timer2({timer, numChars, isFinished}) {
 
 
   function getTime() {
-    console.log("timer value: " + timer)
+    //console.log("timer value: " + timer)
     // if the game is reset
     if (!timer) {
       setCount(0);
@@ -34,13 +34,13 @@ export default function Timer2({timer, numChars, isFinished}) {
       const currentDate = new Date();
       let totalSeconds = currentDate.getTime() - startDate;
       setSeconds(totalSeconds);
-      console.log("total seconds: " + totalSeconds);
+      //console.log("total seconds: " + totalSeconds);
     }
   }
 
 
   const displayWPM = () => {
-    if (timer) {
+    if (timer && (seconds / 1000) > .5) {
       const words = Math.ceil(numChars / 5.1);
       return (
       <h1> 

@@ -58,7 +58,8 @@ export default class TextToType extends Component {
         maxIndex: this.state.wordArray.length,
         toType: newToType,
       });
-      console.log(this.state.maxIndex);
+      this.props.setTotalChars(this.state.quote.length);
+      // console.log(this.state.maxIndex);
       //console.log("length: " + this.state.wordArray.length);
       //this.props.setNumChars(this.state.quote.length);
     });
@@ -82,7 +83,7 @@ export default class TextToType extends Component {
             style: "text-box",
           });
         }
-        console.log(c);
+        // console.log(c);
       }
   };
 
@@ -91,11 +92,11 @@ export default class TextToType extends Component {
     var newWord = newToType.shift();
     this.setState({
       ...this.state,
-      index: ++this.state.index,
+      index: 1 + this.state.index,
       typed: this.state.typed.push(this.state.currentWord),
       toType: newToType,
     });
-    console.log("word index: " + this.state.index + " total index: " + this.state.maxIndex);
+    // console.log("word index: " + this.state.index + " total index: " + this.state.maxIndex);
     this.setState({
       ...this.state,
       currentWord: newWord, //this.state.wordArray[this.state.index++],
@@ -115,10 +116,10 @@ export default class TextToType extends Component {
   handleTextValue(e) {
     isStarted = 1;
     this.props.setTimer(true);
-    console.log("current word: " + this.state.currentWord);
-    console.log("event: " + e.target.value);
-    console.log(this.state.index);
-    console.log(this.state.maxIndex);
+    // console.log("current word: " + this.state.currentWord);
+    // console.log("event: " + e.target.value);
+    // console.log(this.state.index);
+    // console.log(this.state.maxIndex);
     // if this is the last word to be typed:
     if (this.state.maxIndex === this.state.index) {
       if (this.state.currentWord  === e.target.value) {
@@ -127,9 +128,9 @@ export default class TextToType extends Component {
           index: this.state.index + 1,
           style: "text-box-done"
         });
+        this.shiftWords(e);
         e.target.value = "Done!";
         isDone = 1;
-        this.shiftWords(e);
         this.setState({
           style: "text-box-done",
         });
@@ -149,7 +150,7 @@ export default class TextToType extends Component {
         typed: this.state.typed.push(this.state.currentWord),
         toType: newToType,
       });
-      console.log("word index: " + this.state.index + " total index: " + this.state.maxIndex);
+      // console.log("word index: " + this.state.index + " total index: " + this.state.maxIndex);
       this.setState({
         ...this.state,
         currentWord: newWord, //this.state.wordArray[this.state.index++],
@@ -180,6 +181,7 @@ export default class TextToType extends Component {
     }
   };
 
+
   resetValues() {
     this.setState({
       quote: "",
@@ -195,7 +197,7 @@ export default class TextToType extends Component {
       style: "text-box",
       start: 0,
     });
-    console.log(this.state.date);
+    // console.log(this.state.date);
     let input = document.querySelector('input');
     input.value = "";
     isDone = 0;
@@ -210,9 +212,11 @@ export default class TextToType extends Component {
 
     const isFinished = () => {
       if (isDone){
+        this.props.setIsFinished(true);
         return (<p id='text'>Quote by: {this.state.author}</p>);
       }
       else {
+        this.props.setIsFinished(false);
         return null;
       }
     }
