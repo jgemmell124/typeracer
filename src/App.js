@@ -10,15 +10,17 @@ function App() {
   // to be able to start and stop timer from whenver
   const [timer, setTimer] = useState(false);
   // set the number of characters
-  const[numChars, setNumChars] = useState(0);
-  console.log(timer);
+  const [numChars, setNumChars] = useState(0);
+  // determines when it is finished
+  const [isFinished, setIsFinished] = useState(false);
+
   return (
     // [show progress bar]
     
     <div>
-      <Timer2 />
-      <Timer timer={timer} numChars={numChars} />
-      <TextToType setTimer={setTimer} numChars={numChars} setNumChars={setNumChars}/>
+      <Timer2 timer={timer} numChars={numChars} isFinished={isFinished}/>
+      {/* <Timer timer={timer} numChars={numChars} /> */}
+      <TextToType setTimer={setTimer} numChars={numChars} setNumChars={setNumChars} setIsFinished={setIsFinished}/>
       
     </div>
 
