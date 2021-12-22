@@ -5,6 +5,7 @@ import Timer from './Timer';
 var isDone = 0;
 var reset = 0;
 var isStarted = 0;
+
 export default class TextToType extends Component {
 
   constructor(props) {
@@ -66,6 +67,7 @@ export default class TextToType extends Component {
     
   };
 
+  // check the input is correct compared to the input word.
   checkInput = (e) => {
     let input = e.target.value;
       for (var x = 0; x < input.length; x++) {
@@ -81,12 +83,14 @@ export default class TextToType extends Component {
           this.setState({
             ...this.state,
             style: "text-box",
+            wordIndex: x + 1,
           });
         }
         // console.log(c);
       }
   };
 
+  // change the current word, update the lists of typed/untyped words
   shiftWords = (e) => {
     var newToType = this.state.toType;
     var newWord = newToType.shift();
@@ -221,9 +225,29 @@ export default class TextToType extends Component {
       }
     }
 
-    const typingStyle = {
-      textDecorationLine: 'underline',
-    };
+
+    const underlineWord = () => {
+      var lis = [];
+      let wordLength;
+      // TODO: AWAIT API CALL TO PREVENT THIS
+      try {
+        wordLength = this.state.currentWord.length
+      }
+      catch (err) {
+        console.log(err);
+      }
+      for (var i = 0; i < wordLength; i++) {
+        if (i < this.state.wordIndex) {
+          lis.push(<span style={{color: 'green', textDecorationLine: 'underline'}}>{this.state.currentWord[i]}</span>);
+        }
+        else {
+          lis.push(<span style={{textDecorationLine: 'underline'}}>{this.state.currentWord[i]}</span>);
+        }
+      }
+      lis.push(<span> </span>);
+      return lis;
+    }
+    let items = underlineWord();
 
     return (
       <div>
@@ -237,21 +261,25 @@ export default class TextToType extends Component {
             <span style={{color: 'green'}} key={++id}>{word + " "}</span>
             )
           }
-          <span style={{textDecorationLine: 'underline'}}>{this.state.currentWord}</span>
-          <span> </span>
+          {/* the current word to be typed */}
+          {/* <span style={{textDecorationLine: 'underline'}}>{this.state.currentWord}</span>
+          <span> </span> */}
+          {items}
           { // untyped words appear black
             this.state.toType.map((word, id) => 
 
             <span style={{color: 'black'}} key={++id}>{word + " "}</span>
             )
           }
+          
           </p>
           {isFinished()}
           <input id={this.state.style} className='textbox' type="text" onChange={this.handleTextValue} />
         </div>  
-        <div id="restart" onClick={() => this.resetValues()}>
-          <p className='restart'><b>Restart</b></p>
-        </div>
+        <button id="restart" onClick={() => this.resetValues()}>
+          {/* <button className='restart'><b>Restart</b></button> */} 
+          restart
+        </button>
       </div>
     );
   }
