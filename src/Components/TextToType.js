@@ -229,9 +229,12 @@ export default class TextToType extends Component {
     const underlineWord = () => {
       var lis = [];
       let wordLength;
+      
       // TODO: AWAIT API CALL TO PREVENT THIS
       try {
         wordLength = this.state.currentWord.length
+        console.log("word: ", this.state.currentWord.length);
+        console.log("word index: ", this.state.wordIndex);
       }
       catch (err) {
         console.log(err);
@@ -240,11 +243,20 @@ export default class TextToType extends Component {
         if (i < this.state.wordIndex) {
           lis.push(<span style={{color: 'green', textDecorationLine: 'underline'}}>{this.state.currentWord[i]}</span>);
         }
+        else if (this.state.wordIndex == i) {
+          lis.push(<span style={{textDecorationLine: 'underline', borderLeft: "1px solid black"}}>{this.state.currentWord[i]}</span>);
+        }
         else {
           lis.push(<span style={{textDecorationLine: 'underline'}}>{this.state.currentWord[i]}</span>);
         }
       }
-      lis.push(<span> </span>);
+      // add space/underline.
+      if (wordLength == this.state.wordIndex) {
+        lis.push(<span style={{borderLeft: "1px solid black"}}> </span>);
+      }
+      else {
+        lis.push(<span> </span>);
+      }
       return lis;
     }
     let items = underlineWord();
