@@ -2,6 +2,7 @@ import TextToType from "./Components/TextToType";
 import { useState } from 'react';
 import Timer2 from "./Components/Timer2";
 import ProgressBar from "./Components/ProgressBar";
+import { Footer } from "./Components/Footer";
 
 function App() {
 
@@ -24,7 +25,7 @@ function App() {
       {/* <Timer timer={timer} numChars={numChars} /> */}
       <TextToType setTimer={setTimer} numChars={numChars} 
       setTotalChars={setTotalChars} setNumChars={setNumChars} setIsFinished={setIsFinished}/>
-      
+      <Footer />
     </div>
 
   );
