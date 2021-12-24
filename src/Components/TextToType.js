@@ -1,8 +1,6 @@
 import React, { Component, useState, useEffect, useRef } from 'react';
-import '../Styles/TextToType.css';
-import Timer from './Timer';
 import { Button } from '@material-ui/core';
-import '../Styles/TextToType.css'; // for reset score button
+import '../Styles/TextToType.css'; 
 
 var isDone = 0;
 var reset = 0;
@@ -264,7 +262,7 @@ export default class TextToType extends Component {
     let items = underlineWord();
 
     return (
-      <div>
+      <div className="text-container">
         {/* <Timer isDone={isDone} started={this.state.start}/>  */}
         <div className="Text">
           {/* <p id="text">{this.state.quote}</p> */}

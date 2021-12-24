@@ -1,31 +1,34 @@
-import TextToType from "./Components/TextToType";
-import { useState } from 'react';
-import Timer2 from "./Components/Timer2";
-import ProgressBar from "./Components/ProgressBar";
+
 import { Footer } from "./Components/Footer";
+import { Header } from "./Components/Header";
+import { Profile } from "./Components/Profile";
+import { LogIn } from "./Components/LogIn";
+import { LogOut } from "./Components/Logout";
+import { NotFound } from "./Components/NotFound";
+import Racer from "./Components/Racer";
+import { BrowserRouter as Router, Route, Link, Redirect, Routes, useHistory} from "react-router-dom";
+
+
+
 
 function App() {
-
-  // this is all to pass information from sibling components
-  // to be able to start and stop timer from whenver
-  const [timer, setTimer] = useState(false);
-  // set the number of characters
-  const [numChars, setNumChars] = useState(0);
-  // determines when it is finished
-  const [isFinished, setIsFinished] = useState(false);
-  // total characters in the quote to figure out progress bar
-  const [totalChars, setTotalChars] = useState(0);
+  // const history = useHistory();
 
   return (
-    // [show progress bar]
-    
     <div>
-      <Timer2 timer={timer} numChars={numChars} isFinished={isFinished}/>
-      <ProgressBar numChars={numChars} totalChars={totalChars} />
-      {/* <Timer timer={timer} numChars={numChars} /> */}
-      <TextToType setTimer={setTimer} numChars={numChars} 
-      setTotalChars={setTotalChars} setNumChars={setNumChars} setIsFinished={setIsFinished}/>
+    
+      <Router >
+        <Header />
+        <Routes>
+          <Route exact path="/" element={<Racer />} />
+          <Route exact path="/login" element={<LogIn />} />
+          <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/logout" element={<LogOut />} />
+          <Route path="*" element={<NotFound/>} />
+        </Routes>
+      </Router>
       <Footer />
+      
     </div>
 
   );

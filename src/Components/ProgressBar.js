@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../Styles/ProgressBar.css';
 import Car from "../images/sports-car-clip-art.png";
+import Tooltip from '@mui/material/Tooltip';
 
 // this will be like a progress bar
 export default function ProgressBar(props) {
@@ -14,7 +15,9 @@ export default function ProgressBar(props) {
 
   return (
     <div className='Progress'>
-      <img src={Car} className='Racer' style={{paddingLeft: `${padding}%`, paddingTop: '5px', transform: 'scale(1)', transition: '0.15s all ease'}} />
+      <Tooltip title="Guest Racer">
+        <img src={Car} className='Racer' style={{paddingLeft: `${padding}%`, paddingTop: '5px', transform: 'scale(1)', transition: '0.15s all ease'}} />
+      </Tooltip>
     </div>
   );
 }

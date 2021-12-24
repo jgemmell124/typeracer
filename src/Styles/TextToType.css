@@ -59,7 +59,7 @@
   margin-top: 0%;
   margin-left: 10%;
   margin-right: 10%;
-  margin-bottom: 20%;
+  margin-bottom: 10%;
   max-width: 20%;
   border-style: solid;
   border-radius: 5px;
@@ -76,4 +76,8 @@
   margin-top: 10px;
   margin-bottom: 10px;
   
+}
+
+.text-container {
+  display: contents;
 }
