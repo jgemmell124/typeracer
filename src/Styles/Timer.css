@@ -1,0 +1,14 @@
+#reset {
+  /* text-align: center;
+  font-size: 20px;
+  color: white;
+  background-color: #005752; */
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: black;
+}
+
+#reset:hover {
+  background-color: rgb(170, 199, 219);
+}

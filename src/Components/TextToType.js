@@ -1,6 +1,8 @@
 import React, { Component, useState, useEffect, useRef } from 'react';
 import '../Styles/TextToType.css';
 import Timer from './Timer';
+import { Button } from '@material-ui/core';
+import '../Styles/TextToType.css'; // for reset score button
 
 var isDone = 0;
 var reset = 0;
@@ -288,10 +290,9 @@ export default class TextToType extends Component {
           {isFinished()}
           <input id={this.state.style} className='textbox' type="text" onChange={this.handleTextValue} />
         </div>  
-        <button id="restart" onClick={() => this.resetValues()}>
-          {/* <button className='restart'><b>Restart</b></button> */} 
-          restart
-        </button>
+        <Button variant="contained" id="restart" onClick={() => this.resetValues()}>
+          <b>Restart</b>
+        </Button>
       </div>
     );
   }

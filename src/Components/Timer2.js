@@ -1,6 +1,7 @@
-
 import { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
+import { Button } from "@material-ui/core";
+import '../Styles/Timer.css'; 
+
 
 export default function Timer2({timer, numChars, isFinished}) {
   const [count, setCount] = useState(0);
@@ -91,7 +92,10 @@ export default function Timer2({timer, numChars, isFinished}) {
       <h1>Total Time: {seconds / 1000}</h1>
       {displayWPM()}
       <h1>
-        Best Speed: {score}  <button onClick={(() => setScore(0))}>Reset Score</button>
+        Best Speed: {score} <span> </span>
+        <Button size="small" id="reset" variant="contained"  onClick={(() => setScore(0))}>
+          <b>Reset Score</b>
+        </Button>
       </h1>
       {displayStartMessage()}
     </div>
