@@ -4,3 +4,13 @@ body {
   color: white;
   font-size: 100;
 }
+
+.sidebar-logos {
+  padding-top: 42px;
+  align-content: right;
+  width: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 8px;
+}

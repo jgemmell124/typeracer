@@ -18,7 +18,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Home', 'Profile', 'About'];
 const settings = ['Profile', 'Logout'];
 
 export function Header(props) {
@@ -44,8 +44,13 @@ export function Header(props) {
   };
 
   const handleCloseUserMenu = (pageURL) => {
-    
     setAnchorElUser(null);
+    if (pageURL === "home") {
+      navigate('/');
+    }
+    else {
+      navigate(pageURL);
+    }
   };
   
 
