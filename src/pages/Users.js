@@ -49,8 +49,9 @@ export function Users(props) {
         alignItems="center"
         
         spacing={2}>
-        <Item  style={{maxWidth: '30%'}}><img src={`http://127.0.0.1:8000${user.profile_img}`} style={{width: '100%', height: 
-      'auto'}} /></Item>
+        <Item  style={{maxWidth: '30%'}}>
+          <img src={`http://127.0.0.1:8000${user.profile_img}`} style={{width: '100%', height: 'auto'}} />
+        </Item>
         <Item style={{boxShadow:'none'}}></Item>
         <Item   style={{textAlign:'center', maxWidth: '100%', boxShadow:'none'}}>
           <div>
@@ -70,8 +71,7 @@ export function Users(props) {
     else {
       userList = users.map((user, key) => 
       <Item key={key} style={margin}>
-        
-        <h2>{user.username} <img src={`http://127.0.0.1:8000${user.profile_img}`} style={{maxWidth: '100%'}} /></h2>
+        <h2>{user.username} <img src={`http://127.0.0.1:8000${user.profile_img}`} style={{width: '250px', height: 'auto'}} /></h2>
         <p>- Avg WPM: {user.average_wpm}</p>
         <p>- Best WPM {user.best_wpm}</p>
     
@@ -79,35 +79,6 @@ export function Users(props) {
     )}
     return userList
   }
-
-  // const userDetails = () => {
-  //   console.log('getting user details', users)
-
-  //   const userList = users.map((user) => 
-  //     <Item key={user.id}>
-  //       <Stack
-  //         direction="row"
-  //         divider={<Divider orientation="vertical" flexItem />}
-  //         spacing={2}>
-  //         <Item style={{maxWidth: '30%'}}><img src={`http://127.0.0.1:8000${user.profile_img}`} style={{maxWidth: '100%'}} /></Item>
-  //         <div style={{textAlign:'center', maxWidth: '100%'}}>
-  //           <h2>{user.username} </h2>
-  //           <p>- Avg WPM: {user.average_wpm}</p>
-  //           <p>- Best WPM {user.best_wpm}</p>
-  //         </div>
-  //       </Stack>
-  //       test
-  //     </Item>
-  //     // <div key={user} style={{textAlign:'center', maxWidth: '50%'}}>
-  //     //       {/* <h2>{user.username} </h2>
-  //     //       <p>- Avg WPM: {user.average_wpm}</p>
-  //     //       <p>- Best WPM {user.best_wpm}</p> */}
-  //     //       {user}
-  //     // </div> 
-  //     );
-  //     console.log('userlist', userList)
-  //   return userList
-  // }
 
 
   let navigate = useNavigate();
@@ -117,8 +88,7 @@ export function Users(props) {
       <h1>All Users</h1>
       {users ? <Stack style={{textAlign: "center"}} spacing={4}>{userDetails()}</Stack> : <CircularProgress /> }
       <Grid sx={{ '& button': { m: 1 } }} style={{marginTop: '5%'}}>
-        <div><Button variant="contained" size="large" onClick={() => navigate("/login")}> Log in </Button> </div>
-        <div><Button variant="contained" size="medium" onClick={() => navigate("/")}> Return Home </Button></div>
+        <div><Button variant="contained" size="large" onClick={() => navigate("/")}> Return Home </Button></div>
       </Grid>
     </Box>
   )
