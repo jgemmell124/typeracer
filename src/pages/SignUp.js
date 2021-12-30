@@ -12,7 +12,13 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Tooltip from '@mui/material/Tooltip';
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from '@mui/material/InputAdornment';
+import { FormControl, Input, OutlinedInput } from '@mui/material/';
+
+
 
 function Copyright(props) {
   return (
@@ -31,6 +37,7 @@ const theme = createTheme();
 
 export function SignUp() {
   const [error, setError ] = React.useState(false)
+  const [visible, setVisible ] = React.useState(false)
   const [taken, setTaken ] = React.useState(false)
   // send the current username to the server, server checks if its valid and sends back info
 
@@ -55,11 +62,17 @@ export function SignUp() {
     )
   }
 
-  
+  const handleClickShowPassword = () => {
+    setVisible(prev => !prev)
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    if (data.get('password') !== data.get('password2') || data.get('password') === '') {
+      setError(true);
+      return
+    }
     let message = { "username": data.get('username'),
                     "password": data.get('password'),
                   }
@@ -115,7 +128,8 @@ export function SignUp() {
                     helperText={taken ? "Username already taken" : null }
                     error={taken}
                     autoComplete="off"
-                  />
+                  >
+                </TextField>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -123,10 +137,20 @@ export function SignUp() {
                     fullWidth
                     name="password"
                     label="Password"
-                    type="password"
+                    type={visible ? "text" : "password"}
                     id="password"
                     autoComplete="new-password"
-                  />
+                  InputProps={{
+                    endAdornment:
+                     <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    edge="end"
+                  >
+                    {visible ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                  }}
+                />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -134,9 +158,22 @@ export function SignUp() {
                     fullWidth
                     name="password2"
                     label="Confirm Password"
-                    type="password"
+                    type={visible ? "text" : "password"}
                     id="password2"
                     autoComplete="new-password2"
+                    error={error}
+                    helperText={error ? "Passwords do not match" : null }
+                    onChange={(e) => setError(false)}
+                    InputProps={{
+                      endAdornment:
+                       <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {visible ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
