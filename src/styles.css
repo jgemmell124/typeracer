@@ -3,6 +3,7 @@ body {
   background-image: linear-gradient(to right, green, blue);
   color: white;
   font-size: 100;
+  overflow: hidden;
 }
 
 .sidebar-logos {
