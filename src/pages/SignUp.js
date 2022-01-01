@@ -16,7 +16,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from '@mui/material/InputAdornment';
-import { FormControl, Input, OutlinedInput } from '@mui/material/';
+import { Alert, AlertTitle } from '@mui/material/';
 
 
 
@@ -66,6 +66,8 @@ export function SignUp() {
     setVisible(prev => !prev)
   }
 
+  const [resp, setResp] = React.useState('');
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -74,6 +76,7 @@ export function SignUp() {
       return
     }
     let message = { "username": data.get('username'),
+                    "email":    data.get('email'),
                     "password": data.get('password'),
                   }
     console.log(JSON.stringify(message))
@@ -83,16 +86,26 @@ export function SignUp() {
           'Content-Type': 'application/json'
       },
       body: JSON.stringify(message)
-    }).then(
-      (response) =>  {
-        console.log(response)
-        if (!response.ok) {
-          console.log('Could not resiger user')
-        }
+    }).then(response => response.json())
+    .then(data => {
+      if (data.error?.email) {
+        setResp(data.error.email)
       }
-    )
-  };
-
+      else if (data.error?.non_field_errors) {
+        setResp(data.error.non_field_errors[0])
+      }
+      else if (data.error?.username) {
+        setResp(data.error.username[0])
+      }
+      else {
+        setResp('S')
+      }
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      setResp('Error communicating with server, try again later')
+    })};
 
 
   return (
@@ -129,7 +142,18 @@ export function SignUp() {
                     error={taken}
                     autoComplete="off"
                   >
-                </TextField>
+                  </TextField>
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email"
+                    name="email"
+                    autoComplete="off"
+                  >
+                  </TextField>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -183,6 +207,17 @@ export function SignUp() {
                   />
                 </Grid>
               </Grid>
+              { resp === '' || resp === 'S' ? 
+              null :
+              <Alert variant='filled' severity="error">
+                 <AlertTitle>Error</AlertTitle>
+                  {resp}
+              </Alert>}
+              { resp === 'S' ? 
+              
+              <Alert variant='filled' severity="success">
+                  Account Created Successfully!
+              </Alert> : null}  
               <Button
                 disabled={taken}
                 type="submit"
