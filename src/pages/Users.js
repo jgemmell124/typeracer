@@ -50,7 +50,7 @@ export function Users(props) {
         
         spacing={2}>
         <Item  style={{maxWidth: '30%'}}>
-          <img src={`http://127.0.0.1:8000${user.profile_img}`} style={{width: '100%', height: 'auto'}} />
+          <img src={`http://127.0.0.1:8000${user.profile_image}`} style={{width: '100%', height: 'auto'}} />
         </Item>
         <Item style={{boxShadow:'none'}}></Item>
         <Item   style={{textAlign:'center', maxWidth: '100%', boxShadow:'none'}}>
