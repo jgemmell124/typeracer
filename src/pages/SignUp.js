@@ -98,6 +98,7 @@ export function SignUp() {
         setResp(data.error.username[0])
       }
       else {
+        //TODO LOGIN AFTER SUCCESSFUL SIGN UP AND REDIRECT TO HOME
         setResp('S')
       }
       console.log('Success:', data);
@@ -174,7 +175,7 @@ export function SignUp() {
                     {visible ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                   }}
-                />
+                  />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField

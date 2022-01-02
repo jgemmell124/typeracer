@@ -14,7 +14,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-
+import AuthContext from '../utils/AuthProvider'
 
 
 
@@ -24,9 +24,13 @@ const settings = ['Profile', 'Logout'];
 export function Header(props) {
 
   let navigate = useNavigate();
+  let {user} = React.useContext(AuthContext)
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const [ img , setImage ] = React.useState('');
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -52,7 +56,37 @@ export function Header(props) {
       navigate(pageURL);
     }
   };
+
+
+
+  const getimgPath = async (id) => {
+    let response = await fetch(`http://127.0.0.1:8000/api/users/${id}`)
+    let data = await response.json()
+    return data.profile_image
+  }
+
+  const getProfilePicture = async () => {
+    console.log('user: ', user)
+    console.log('outside')
+    if (user !== null) {
+      console.log('inside')
+      let id = user.user_id
+      console.log('id', id)
+      let image = await getimgPath(id);
+      console.log('path: ', img)
+      setImage(`http://127.0.0.1:8000/${image}`)
+      console.log('image path: ', img)
+    }
+    else {
+      setImage("http://127.0.0.1:8000/profile_pics/default.jpg")
+    }
+  }
   
+
+  React.useEffect(() => {
+    console.log('here')
+    getProfilePicture()
+  }, [user])
 
   return (
     <AppBar position="static">
@@ -125,11 +159,11 @@ export function Header(props) {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+              <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src={img} />
               </IconButton>
-            </Tooltip>
+              </Tooltip> 
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
